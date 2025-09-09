@@ -27,7 +27,7 @@ The application also generates official reports in Excel format for submission t
 
 ## 🚀 Getting Started
 
-> ⚠️ This project was developed as part of my **Final Year Project (Spanish TFC)** during my Advanced Vocational Training studies.
+> ⚠️ This project was developed as part of my **Final Year Project (Spanish TFC)** during my Advanced Vocational Training studies in 2018.
 > It is published for educational and portfolio purposes.
 
 1. Clone the repository:
