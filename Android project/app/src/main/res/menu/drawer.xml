@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/lateralFlights"
+        android:title="@string/lateralFlights"
+        android:icon="@mipmap/ic_flights" />
+    <item android:id="@+id/lateralBookings"
+        android:title="@string/lateralBookings"
+        android:icon="@mipmap/ic_bookings" />
+    <item android:id="@+id/lateralProfile"
+        android:title="@string/lateralProfile"
+        android:icon="@mipmap/ic_profile" />
+    <item android:id="@+id/lateralLogout"
+        android:title="@string/lateralLogout"
+        android:icon="@mipmap/ic_logout" />
+</menu>

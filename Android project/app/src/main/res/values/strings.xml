@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Flight LogApp</string>
+
+    <string name="loginUsername">Username</string>
+    <string name="loginUsernameError">Username cannot be empty</string>
+    <string name="loginPassword">Password</string>
+    <string name="loginPasswordError">Passwordcannot be empty</string>
+    <string name="loginButton">Login</string>
+    <string name="loginError">The username or password is incorrect</string>
+
+    <string name="profileImageDescription">User\'s profile image</string>
+    <string name="lateralHeaderName">ERROR NAME</string>
+    <string name="lateralHeaderUserType">ERROR USER TYPE</string>
+    <string name="lateralFlights">See flights</string>
+    <string name="lateralBookings">See bookings</string>
+    <string name="lateralProfile">My profile</string>
+    <string name="lateralLogout">Logout</string>
+
+    <string name="moreOptions">More options&#8230;</string>
+    <string name="optionsFilter">Filter by&#8230;</string>
+    <string name="optionsSort">Sort by&#8230;</string>
+
+    <string name="departureText">Departure:\t\t</string>
+    <string name="arrivalText">Arrival:\t\t\t\t\t</string>
+    <string name="plateText">Plate:\t\t</string>
+    <string name="modelText">\t\t\t\t\t\tModel:\t\t</string>
+    <string name="dateText">Date:\t\t</string>
+    <string name="durationText">\t\tDuration:\t\t</string>
+
+    <string name="profileName">Name</string>
+    <string name="profileLastname">Lastname</string>
+    <string name="profileLandingField">Main landing field</string>
+    <string name="profileUserType">User Type</string>
+    <string name="profileImageCamera">Take a picture&#8230;</string>
+    <string name="profileImageGallery">Pick a picture&#8230;</string>
+    <string name="profileImageDelete">Delete</string>
+    <string name="profileImageCancel">Cancel</string>
+    <string name="profileUsername">Username</string>
+    <string name="profileEditUsername">New username (leave blank to keep actual)</string>
+    <string name="profilePassword">Password</string>
+    <string name="profileEditPassword">New password (leave blank to keep actual)</string>
+    <string name="profileRepeatPassword">Repeat password</string>
+    <string name="profilePasswordError">Passwords don\'t match!</string>
+
+    <string name="dfDepartureSite">Departure Site</string>
+    <string name="dfDepartureDate">Departure Date</string>
+    <string name="dfArrivalSite">Arrival Site</string>
+    <string name="dfArrivalDate">Arrival Date</string>
+    <string name="dfPlane">Plane</string>
+    <string name="dfDuration">Duration</string>
+    <string name="dfPilot">Pilot</string>
+    <string name="dfMonoPilot">Mono pilot?</string>
+    <string name="dfDayLandings">Day Landings</string>
+    <string name="dfNightLandings">Night Landings</string>
+    <string name="dfSendButton">Save flight</string>
+    <string name="deleteFlight">¿Do you want to delete: %1$s - %2$s flight?</string>
+
+    <string name="editBookingPermissionsError">You can\'t edit other\'s booking</string>
+    <string name="dbPilot">Pilot</string>
+    <string name="dbPlane">Plane</string>
+    <string name="dbDate">Date</string>
+    <string name="dbDuration">Duration</string>
+    <string name="dbSendButton">Save booking</string>
+    <string name="deleteBooking">¿Do you want to delete: %1$s booking?</string>
+
+    <string name="flightAdded">Flight added successfully</string>
+    <string name="flightUpdated">Flight updated successfully</string>
+    <string name="flightDeleted">Flight deleted successfully</string>
+    <string name="bookingAdded">Booking added successfully</string>
+    <string name="bookingUpdated">Booking updated successfully</string>
+    <string name="bookingDeleted">Booking deleted successfully</string>
+    <string name="userUpdated">User updated successfully</string>
+
+    <string name="deleteButtonText">DELETE</string>
+    <string name="cancelButtonText">Cancel</string>
+
+    <string name="orderDate">Order by date&#8230;</string>
+    <string name="orderDepartureDate">Order by departure date&#8230;</string>
+    <string name="orderPlane">Order by plane model&#8230;</string>
+    <string name="orderDuration">Order by duration&#8230;</string>
+    <string name="orderPilot">Order by pilot name&#8230;</string>
+    <string name="orderAsc">Order ascendent</string>
+    <string name="orderDesc">Order descendent</string>
+    <string name="orderButton">Save order</string>
+
+    <string name="filterDateFrom">From date&#8230;</string>
+    <string name="filterDateTo">To date&#8230;</string>
+    <string name="filterButton">Save filter</string>
+
+    <string name="permissionGranted">Permissions granted successfully</string>
+    <string name="permissionDenied">Permissions denied. You need permissions to do that.</string>
+</resources>

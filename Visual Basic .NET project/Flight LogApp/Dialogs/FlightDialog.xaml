@@ -1,0 +1,75 @@
+﻿<Window x:Class="FlightDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flight_LogApp"
+        xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Flight" Height="325" Width="655" ResizeMode="NoResize" Icon="/Flight LogApp;component/images/logo.ico">
+    <Grid VerticalAlignment="Center" Margin="20,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Departure site: " VerticalAlignment="Center" />
+        <ComboBox x:Name="departureSiteComboBox" DisplayMemberPath="name" Grid.Column="1" VerticalAlignment="Center" Margin="10" TabIndex="1" />
+        <TextBlock Text="Arrival site: " Grid.Column="2" VerticalAlignment="Center" />
+        <ComboBox x:Name="arrivalSiteComboBox" DisplayMemberPath="name" Grid.Column="3" VerticalAlignment="Center" Margin="10" TabIndex="2" />
+        <TextBlock Grid.Row="1" Text="Departure date: " VerticalAlignment="Center" />
+        <DatePicker x:Name="departureDateDatePicker" Grid.Row="1" Grid.Column="1" TabIndex="3" Margin="10,10,0,10" IsTabStop="True" Width="119" HorizontalAlignment="Left" />
+        <wpfx:TimePicker x:Name="departureTimeTimePicker" Grid.Row="1" Grid.Column="1" Margin="0,10,10,10" TabIndex="4" Width="80" HorizontalAlignment="Right" />
+        <TextBlock Grid.Row="1" Grid.Column="2" Text="Arrival date: " VerticalAlignment="Center" />
+        <DatePicker x:Name="arrivalDateDatePicker" Grid.Row="1" Grid.Column="3" TabIndex="5" Margin="10,10,0,10" IsTabStop="True" Width="119" HorizontalAlignment="Left" />
+        <wpfx:TimePicker x:Name="arrivalTimeTimePicker" Grid.Row="1" Grid.Column="3" Margin="0,10,10,10" TabIndex="6" Width="80" HorizontalAlignment="Right" />
+        <TextBlock Text="Plane: " Grid.Row="2" VerticalAlignment="Center" />
+        <ComboBox x:Name="planeComboBox" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" Margin="10" TabIndex="7">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} - {1}">
+                                <Binding Path="plate"/>
+                                <Binding Path="model"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="Pilot: " Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" />
+        <ComboBox x:Name="pilotComboBox" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" Margin="10" TabIndex="8">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="name"/>
+                                <Binding Path="lastname"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="Duration: " Grid.Row="3" VerticalAlignment="Center" />
+        <wpfx:TimePicker x:Name="durationTimePicker" Grid.Row="3" Grid.Column="1" Margin="10" TabIndex="0" />
+        <TextBlock Text="MonoPilot?: " Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" />
+        <CheckBox x:Name="monoPilotCheckBox" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" Margin="10" TabIndex="10" />
+        <TextBlock Text="Day landings: " Grid.Row="4" VerticalAlignment="Center" />
+        <TextBox x:Name="dayLandingsTextBox" Grid.Row="4" Grid.Column="1" Margin="10" TabIndex="11" />
+        <TextBlock Text="Night landings: " Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" />
+        <TextBox x:Name="nightLandingsTextBox" Grid.Row="4" Grid.Column="4" Margin="10" TabIndex="12" />
+        <Button x:Name="sendFlightButton" Grid.Row="5" Grid.Column="4" Margin="10" Content="Send" Click="sendFlightButton_Click" TabIndex="13" />
+    </Grid>
+</Window>

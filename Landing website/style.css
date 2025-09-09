@@ -1,0 +1,24 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+#header {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+}
+#downloads {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+#downloads > a > img {
+    width: 100px;
+    height: auto;
+    margin: 50px;
+}

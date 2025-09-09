@@ -1,0 +1,92 @@
+<resources>
+    <string name="app_name">Flight LogApp</string>
+
+    <string name="loginUsername">Nombre de usuario</string>
+    <string name="loginUsernameError">El nombre de usuario no puede estar vacío</string>
+    <string name="loginPassword">Contraseña</string>
+    <string name="loginPasswordError">La contraseña no puede estar vacía</string>
+    <string name="loginButton">Iniciar sesión</string>
+    <string name="loginError">El usuario o la contraseña son incorrectos</string>
+
+    <string name="profileImageDescription">Imagen de perfil del usuario</string>
+    <string name="lateralHeaderName">ERROR NOMBRE</string>
+    <string name="lateralHeaderUserType">ERROR TIPO</string>
+    <string name="lateralFlights">Ver vuelos</string>
+    <string name="lateralBookings">Ver reservas</string>
+    <string name="lateralProfile">Mi perfil</string>
+    <string name="lateralLogout">Cerrar sesión</string>
+
+    <string name="moreOptions">Más opciones&#8230;</string>
+    <string name="optionsFilter">Filtrar por&#8230;</string>
+    <string name="optionsSort">Ordenar por&#8230;</string>
+
+    <string name="departureText">Salida:\t\t\t</string>
+    <string name="arrivalText">Llegada:\t\t</string>
+    <string name="plateText">Matrícula:\t\t</string>
+    <string name="modelText">\t\t\t\tModelo:\t\t</string>
+    <string name="dateText">Fecha:\t\t</string>
+    <string name="durationText">\t\tDuración:\t\t</string>
+
+    <string name="profileName">Nombre</string>
+    <string name="profileLastname">Apellidos</string>
+    <string name="profileLandingField">Campo principal</string>
+    <string name="profileUserType">Tipo Usuario</string>
+    <string name="profileImageCamera">Hacer una foto&#8230;</string>
+    <string name="profileImageGallery">Eligir una foto&#8230;</string>
+    <string name="profileImageDelete">Eliminar</string>
+    <string name="profileImageCancel">Cancelar</string>
+    <string name="profileUsername">Usuario</string>
+    <string name="profileEditUsername">Nuevo usuario(dejar en blanco para mantener actual)</string>
+    <string name="profilePassword">Contraseña</string>
+    <string name="profileEditPassword">Nueva contraseña(dejar en blanco para mantener actual)</string>
+    <string name="profileRepeatPassword">Repetir contraseña</string>
+    <string name="profilePasswordError">Las contraseñas no coinciden!</string>
+
+    <string name="dfDepartureSite">Lugar salida</string>
+    <string name="dfDepartureDate">Fecha salida</string>
+    <string name="dfArrivalSite">Lugar llegada</string>
+    <string name="dfArrivalDate">Fecha llegada</string>
+    <string name="dfPlane">Avión</string>
+    <string name="dfDuration">Duración</string>
+    <string name="dfPilot">Piloto</string>
+    <string name="dfMonoPilot">Un solo piloto?</string>
+    <string name="dfDayLandings">Aterrizajes día</string>
+    <string name="dfNightLandings">Aterrizajes noche</string>
+    <string name="dfSendButton">Guardar vuelo</string>
+    <string name="deleteFlight">¿Quieres eliminar el vuelo: %1$s - %2$s?</string>
+
+    <string name="editBookingPermissionsError">No puedes editar la reserva de otro</string>
+    <string name="dbPilot">Piloto</string>
+    <string name="dbPlane">Avión</string>
+    <string name="dbDate">Fecha</string>
+    <string name="dbDuration">Duración</string>
+    <string name="dbSendButton">Guardar reserva</string>
+    <string name="deleteBooking">¿Quieres eliminar la reserva: %1$s ?</string>
+
+    <string name="flightAdded">Vuelo añadido correctamente</string>
+    <string name="flightUpdated">Vuelo actualizado correctamente</string>
+    <string name="flightDeleted">Vuelo eliminado correctamente</string>
+    <string name="bookingAdded">Reserva añadida correctamente</string>
+    <string name="bookingUpdated">Reserva actualizada correctamente</string>
+    <string name="bookingDeleted">Reserva eliminada correctamente</string>
+    <string name="userUpdated">Usuario actalizado correctamente</string>
+
+    <string name="deleteButtonText">ELIMINAR</string>
+    <string name="cancelButtonText">CANCELAR</string>
+
+    <string name="orderDate">Ordenar por fecha&#8230;</string>
+    <string name="orderDepartureDate">Ordenar por fecha salida&#8230;</string>
+    <string name="orderPlane">Ordenar por modelo de avión&#8230;</string>
+    <string name="orderDuration">Ordenar por duration&#8230;</string>
+    <string name="orderPilot">Ordenar por nombre piloto&#8230;</string>
+    <string name="orderAsc">Orden ascendente</string>
+    <string name="orderDesc">Orden descendente</string>
+    <string name="orderButton">Guardar orden</string>
+
+    <string name="filterDateFrom">Desde fecha&#8230;</string>
+    <string name="filterDateTo">Hasta fecha&#8230;</string>
+    <string name="filterButton">Guardar filtro</string>
+
+    <string name="permissionGranted">Permisos dados correctamente</string>
+    <string name="permissionDenied">Permisos denegados. Necesitas permisos para hacer eso.</string>
+</resources>

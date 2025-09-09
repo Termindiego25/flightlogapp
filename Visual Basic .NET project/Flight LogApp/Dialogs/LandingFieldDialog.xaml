@@ -1,0 +1,25 @@
+﻿<Window x:Class="LandingFieldDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flight_LogApp"
+        mc:Ignorable="d"
+        Title="Landing field" Height="188.136" Width="300" ResizeMode="NoResize" Icon="/Flight LogApp;component/images/logo.ico">
+    <Grid VerticalAlignment="Center" Margin="20,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Name: " VerticalAlignment="Center" />
+        <TextBox x:Name="nameTextBox" Grid.Column="1" Margin="10" TabIndex="1" />
+        <TextBlock Grid.Row="1" Text="Acronym: " VerticalAlignment="Center" HorizontalAlignment="Center" />
+        <TextBox x:Name="acronymTextBox" Grid.Row="1" Grid.Column="1" Margin="10" TabIndex="2" />
+        <Button x:Name="sendLandingFieldButton" Grid.Row="2" Grid.Column="1" Margin="10" Content="Send" Click="sendLandingFieldButton_Click" TabIndex="3" />
+    </Grid>
+</Window>

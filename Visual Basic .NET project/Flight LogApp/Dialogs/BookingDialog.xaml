@@ -1,0 +1,59 @@
+﻿<Window x:Class="BookingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:Flight_LogApp"
+        mc:Ignorable="d"
+        Title="Booking" Height="300" Width="575" ResizeMode="NoResize" Icon="/Flight LogApp;component/images/logo.ico">
+    <Grid VerticalAlignment="Center" Margin="20,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Date: " VerticalAlignment="Center" />
+        <DatePicker x:Name="dateDatePicker" Grid.Column="1" TabIndex="1" Margin="10,10,0,10" IsTabStop="True" Width="120" HorizontalAlignment="Left" />
+        <wpfx:TimePicker x:Name="timeTimePicker" Grid.Column="1" Margin="0,10,10,10" TabIndex="2" Width="80" HorizontalAlignment="Right" />
+        <TextBlock Text="Duration: " Grid.Column="2" VerticalAlignment="Center" />
+        <wpfx:TimePicker x:Name="durationTimePicker" Grid.Column="3" Margin="10" TabIndex="3" />
+        <TextBlock Text="Plane: " Grid.Row="1" VerticalAlignment="Center" />
+        <ComboBox x:Name="planeComboBox" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" Margin="10" TabIndex="4">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} - {1}">
+                                <Binding Path="plate"/>
+                                <Binding Path="model"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Text="Pilot: " Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" />
+        <ComboBox x:Name="pilotComboBox" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" Margin="10" TabIndex="5" IsEnabled="False">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} {1}">
+                                <Binding Path="name"/>
+                                <Binding Path="lastname"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <Button x:Name="sendBookingButton" Grid.Row="2" Grid.Column="3" Margin="10" Content="Send" Click="sendBookingButton_Click" TabIndex="6" />
+    </Grid>
+</Window>

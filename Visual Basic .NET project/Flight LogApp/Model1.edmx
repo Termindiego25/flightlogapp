@@ -1,0 +1,595 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="flightlogappModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="bookings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pilot" Type="int" Nullable="false" />
+          <Property Name="plane" Type="int" Nullable="false" />
+          <Property Name="date" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="duration" Type="time" Precision="0" Nullable="false" />
+        </EntityType>
+        <EntityType Name="flights">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departureSite" Type="int" Nullable="false" />
+          <Property Name="departureDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="arrivalSite" Type="int" Nullable="false" />
+          <Property Name="arrivalDate" Type="datetime" Precision="0" Nullable="false" />
+          <Property Name="plane" Type="int" Nullable="false" />
+          <Property Name="duration" Type="time" Precision="0" />
+          <Property Name="pilot" Type="int" Nullable="false" />
+          <Property Name="monoPilot" Type="int" Nullable="false" />
+          <Property Name="dayLandings" Type="int" />
+          <Property Name="nightLandings" Type="int" />
+        </EntityType>
+        <EntityType Name="landingFields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="acronym" Type="text" Nullable="false" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="plate" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="owner" Type="int" Nullable="false" />
+          <Property Name="model" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="landingField" Type="int" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="text" Nullable="false" />
+          <Property Name="password" Type="text" Nullable="false" />
+          <Property Name="userType" Type="int" Nullable="false" />
+          <Property Name="landingField" Type="int" Nullable="false" />
+          <Property Name="name" Type="text" Nullable="false" />
+          <Property Name="lastname" Type="text" Nullable="false" />
+          <Property Name="image" Type="longtext" />
+        </EntityType>
+        <EntityType Name="userTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="type" Type="text" Nullable="false" />
+        </EntityType>
+        <Association Name="bookings_ibfk_1">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="plane" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bookings_ibfk_2">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="pilot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_1">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="arrivalSite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_2">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="departureSite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_3">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="pilot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_4">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="plane" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="planes_ibfk_1">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="planes" Type="Self.planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="planesLanding_FK">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="0..1" />
+          <End Role="planes" Type="Self.planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="landingField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_ibfk_1">
+          <End Role="userTypes" Type="Self.userTypes" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="userType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_ibfk_2">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="landingField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="flightlogappModelStoreContainer">
+          <EntitySet Name="bookings" EntityType="Self.bookings" Schema="flightlogapp" store:Type="Tables" />
+          <EntitySet Name="flights" EntityType="Self.flights" Schema="flightlogapp" store:Type="Tables" />
+          <EntitySet Name="landingFields" EntityType="Self.landingFields" Schema="flightlogapp" store:Type="Tables" />
+          <EntitySet Name="planes" EntityType="Self.planes" Schema="flightlogapp" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="flightlogapp" store:Type="Tables" />
+          <EntitySet Name="userTypes" EntityType="Self.userTypes" Schema="flightlogapp" store:Type="Tables" />
+          <AssociationSet Name="bookings_ibfk_1" Association="Self.bookings_ibfk_1">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="bookings_ibfk_2" Association="Self.bookings_ibfk_2">
+            <End Role="users" EntitySet="users" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_1" Association="Self.flights_ibfk_1">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_2" Association="Self.flights_ibfk_2">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_3" Association="Self.flights_ibfk_3">
+            <End Role="users" EntitySet="users" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_4" Association="Self.flights_ibfk_4">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="planes_ibfk_1" Association="Self.planes_ibfk_1">
+            <End Role="users" EntitySet="users" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+          <AssociationSet Name="planesLanding_FK" Association="Self.planesLanding_FK">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+          <AssociationSet Name="users_ibfk_1" Association="Self.users_ibfk_1">
+            <End Role="userTypes" EntitySet="userTypes" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="users_ibfk_2" Association="Self.users_ibfk_2">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="flightlogappModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="bookings">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pilot" Type="Int32" Nullable="false" />
+          <Property Name="plane" Type="Int32" Nullable="false" />
+          <Property Name="date" Type="DateTime" Nullable="false" />
+          <Property Name="duration" Type="Time" Nullable="false" />
+          <NavigationProperty Name="Planes" Relationship="Self.bookings_ibfk_1" FromRole="bookings" ToRole="planes" />
+          <NavigationProperty Name="User" Relationship="Self.bookings_ibfk_2" FromRole="bookings" ToRole="users" />
+        </EntityType>
+        <EntityType Name="flights">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departureSite" Type="Int32" Nullable="false" />
+          <Property Name="departureDate" Type="DateTime" Nullable="false" />
+          <Property Name="arrivalSite" Type="Int32" Nullable="false" />
+          <Property Name="arrivalDate" Type="DateTime" Nullable="false" />
+          <Property Name="plane" Type="Int32" Nullable="false" />
+          <Property Name="duration" Type="Time" />
+          <Property Name="pilot" Type="Int32" Nullable="false" />
+          <Property Name="monoPilot" Type="Int32" Nullable="false" />
+          <Property Name="dayLandings" Type="Int32" />
+          <Property Name="nightLandings" Type="Int32" />
+          <NavigationProperty Name="ArrivalField" Relationship="Self.flights_ibfk_1" FromRole="flights" ToRole="landingFields" />
+          <NavigationProperty Name="DepartureField" Relationship="Self.flights_ibfk_2" FromRole="flights" ToRole="landingFields" />
+          <NavigationProperty Name="User" Relationship="Self.flights_ibfk_3" FromRole="flights" ToRole="users" />
+          <NavigationProperty Name="Planes" Relationship="Self.flights_ibfk_4" FromRole="flights" ToRole="planes" />
+        </EntityType>
+        <EntityType Name="landingFields">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="acronym" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ArrivalFlights" Relationship="Self.flights_ibfk_1" FromRole="landingFields" ToRole="flights" />
+          <NavigationProperty Name="DepartureFlights" Relationship="Self.flights_ibfk_2" FromRole="landingFields" ToRole="flights" />
+          <NavigationProperty Name="Users" Relationship="Self.users_ibfk_2" FromRole="landingFields" ToRole="users" />
+          <NavigationProperty Name="planes" Relationship="flightlogappModel.planesLanding_FK" FromRole="landingFields" ToRole="planes" />
+        </EntityType>
+        <EntityType Name="planes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="plate" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="owner" Type="Int32" Nullable="false" />
+          <Property Name="model" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Bookings" Relationship="Self.bookings_ibfk_1" FromRole="planes" ToRole="bookings" />
+          <NavigationProperty Name="Flights" Relationship="Self.flights_ibfk_4" FromRole="planes" ToRole="flights" />
+          <NavigationProperty Name="User" Relationship="Self.planes_ibfk_1" FromRole="planes" ToRole="users" />
+          <Property Name="landingField" Type="Int32" />
+          <NavigationProperty Name="LandingFields" Relationship="flightlogappModel.planesLanding_FK" FromRole="planes" ToRole="landingFields" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userType" Type="Int32" Nullable="false" />
+          <Property Name="landingField" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastname" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="1073741823" FixedLength="false" Unicode="false" Nullable="true" />
+          <NavigationProperty Name="Bookings" Relationship="Self.bookings_ibfk_2" FromRole="users" ToRole="bookings" />
+          <NavigationProperty Name="Flights" Relationship="Self.flights_ibfk_3" FromRole="users" ToRole="flights" />
+          <NavigationProperty Name="LandingFields" Relationship="Self.users_ibfk_2" FromRole="users" ToRole="landingFields" />
+          <NavigationProperty Name="Planes" Relationship="Self.planes_ibfk_1" FromRole="users" ToRole="planes" />
+          <NavigationProperty Name="UserTypes" Relationship="Self.users_ibfk_1" FromRole="users" ToRole="userTypes" />
+        </EntityType>
+        <EntityType Name="userTypes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="type" Type="String" MaxLength="65535" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.users_ibfk_1" FromRole="userTypes" ToRole="users" />
+        </EntityType>
+        <Association Name="bookings_ibfk_1">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="plane" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="bookings_ibfk_2">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="bookings" Type="Self.bookings" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="bookings">
+              <PropertyRef Name="pilot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_1">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="arrivalSite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_2">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="departureSite" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_3">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="pilot" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="flights_ibfk_4">
+          <End Role="planes" Type="Self.planes" Multiplicity="1" />
+          <End Role="flights" Type="Self.flights" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="planes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="flights">
+              <PropertyRef Name="plane" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_ibfk_2">
+          <End Role="landingFields" Type="Self.landingFields" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="landingField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="planes_ibfk_1">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="planes" Type="Self.planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="owner" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="users_ibfk_1">
+          <End Role="userTypes" Type="Self.userTypes" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="userTypes">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="userType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="flightlogappEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="bookings" EntityType="Self.bookings" />
+          <EntitySet Name="flights" EntityType="Self.flights" />
+          <EntitySet Name="landingFields" EntityType="Self.landingFields" />
+          <EntitySet Name="planes" EntityType="Self.planes" />
+          <EntitySet Name="users" EntityType="Self.users" />
+          <EntitySet Name="userTypes" EntityType="Self.userTypes" />
+          <AssociationSet Name="bookings_ibfk_1" Association="Self.bookings_ibfk_1">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="bookings_ibfk_2" Association="Self.bookings_ibfk_2">
+            <End Role="users" EntitySet="users" />
+            <End Role="bookings" EntitySet="bookings" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_1" Association="Self.flights_ibfk_1">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_2" Association="Self.flights_ibfk_2">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_3" Association="Self.flights_ibfk_3">
+            <End Role="users" EntitySet="users" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="flights_ibfk_4" Association="Self.flights_ibfk_4">
+            <End Role="planes" EntitySet="planes" />
+            <End Role="flights" EntitySet="flights" />
+          </AssociationSet>
+          <AssociationSet Name="users_ibfk_2" Association="Self.users_ibfk_2">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="planes_ibfk_1" Association="Self.planes_ibfk_1">
+            <End Role="users" EntitySet="users" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+          <AssociationSet Name="users_ibfk_1" Association="Self.users_ibfk_1">
+            <End Role="userTypes" EntitySet="userTypes" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <AssociationSet Name="planesLanding_FK" Association="flightlogappModel.planesLanding_FK">
+            <End Role="landingFields" EntitySet="landingFields" />
+            <End Role="planes" EntitySet="planes" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="planesLanding_FK">
+          <End Type="flightlogappModel.landingFields" Role="landingFields" Multiplicity="0..1" />
+          <End Type="flightlogappModel.planes" Role="planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="landingFields">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="planes">
+              <PropertyRef Name="landingField" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="flightlogappModelStoreContainer" CdmEntityContainer="flightlogappEntities">
+          <EntitySetMapping Name="bookings">
+            <EntityTypeMapping TypeName="flightlogappModel.bookings">
+              <MappingFragment StoreEntitySet="bookings">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="pilot" ColumnName="pilot" />
+                <ScalarProperty Name="plane" ColumnName="plane" />
+                <ScalarProperty Name="date" ColumnName="date" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="flights">
+            <EntityTypeMapping TypeName="flightlogappModel.flights">
+              <MappingFragment StoreEntitySet="flights">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="departureSite" ColumnName="departureSite" />
+                <ScalarProperty Name="departureDate" ColumnName="departureDate" />
+                <ScalarProperty Name="arrivalSite" ColumnName="arrivalSite" />
+                <ScalarProperty Name="arrivalDate" ColumnName="arrivalDate" />
+                <ScalarProperty Name="plane" ColumnName="plane" />
+                <ScalarProperty Name="duration" ColumnName="duration" />
+                <ScalarProperty Name="pilot" ColumnName="pilot" />
+                <ScalarProperty Name="monoPilot" ColumnName="monoPilot" />
+                <ScalarProperty Name="dayLandings" ColumnName="dayLandings" />
+                <ScalarProperty Name="nightLandings" ColumnName="nightLandings" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="landingFields">
+            <EntityTypeMapping TypeName="flightlogappModel.landingFields">
+              <MappingFragment StoreEntitySet="landingFields">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="acronym" ColumnName="acronym" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="planes">
+            <EntityTypeMapping TypeName="flightlogappModel.planes">
+              <MappingFragment StoreEntitySet="planes">
+                <ScalarProperty Name="landingField" ColumnName="landingField" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="plate" ColumnName="plate" />
+                <ScalarProperty Name="owner" ColumnName="owner" />
+                <ScalarProperty Name="model" ColumnName="model" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="flightlogappModel.users">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="userType" ColumnName="userType" />
+                <ScalarProperty Name="landingField" ColumnName="landingField" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="lastname" ColumnName="lastname" />
+                <ScalarProperty Name="image" ColumnName="image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="userTypes">
+            <EntityTypeMapping TypeName="flightlogappModel.userTypes">
+              <MappingFragment StoreEntitySet="userTypes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="type" ColumnName="type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

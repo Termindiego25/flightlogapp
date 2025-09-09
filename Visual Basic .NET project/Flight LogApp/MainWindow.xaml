@@ -1,0 +1,172 @@
+﻿<Window x:Class="MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Flight_LogApp"
+        mc:Ignorable="d"
+        Title="Flight LogApp" Height="575" Width="975" MinWidth="975" MinHeight="575" Icon="images/logo.ico">
+    <TabControl SelectionChanged="TabControl_SelectionChanged">
+        <TabItem x:Name="tabFlights" Header="Flights" TabIndex="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Filter from:" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker Name="fromDatePickerFlight" Margin="10,0" TabIndex="1" IsTabStop="True"/>
+                    <TextBlock Text="to:" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker Name="toDatePickerFlight" Margin="10,0" TabIndex="2" IsTabStop="True"/>
+                    <Button Content="Filter" Click="flightsFilter_Click" TabIndex="3"></Button>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="addFlightButton" Content="Add flight" Click="addFlightButton_Click" TabIndex="4"></Button>
+                    <Button x:Name="updateFlightButton" Content="Update selection" Click="updateFlightButton_Click" Margin="200,0" TabIndex="5"></Button>
+                    <Button x:Name="deleteFlightButton" Content="Delete selection" Click="deleteFlightButton_Click" TabIndex="6"></Button>
+                </StackPanel>
+                <DataGrid Name="flightsDataGrid" SelectionChanged="SelectionChanged" ColumnWidth="Auto" ItemsSource="{Binding}" Margin="10,0" AutoGenerateColumns="False" SelectionMode="Single" TabIndex="0" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding departureDate}" Header="Departure date" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding DepartureField.name}" Header="Departure site" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding arrivalDate}" Header="Arrival date" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding ArrivalField.name}" Header="Arrival site" Width="Auto"/>
+                        <DataGridTextColumn Binding="{Binding Planes.plate}" Header="Plane" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding duration}" Header="Duration" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding User.name}" Header="Pilot" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding monoPilot}" Header="MonoPilot?" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding dayLandings}" Header="Day landings" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding nightLandings}" Header="Night landings" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+        <TabItem x:Name="tabBookings" Header="Bookings" TabIndex="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Filter from:" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker Name="fromDatePickerBooking" Margin="10,0" TabIndex="1" IsTabStop="True"/>
+                    <TextBlock Text="to:" VerticalAlignment="Center"></TextBlock>
+                    <DatePicker Name="toDatePickerBooking" Margin="10,0" TabIndex="2" IsTabStop="True"/>
+                    <Button Content="Filter" Click="bookingsFilter_Click" TabIndex="3"></Button>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="addBookingButton" Content="Add booking" Click="addBookingButton_Click" TabIndex="4"></Button>
+                    <Button x:Name="updateBookingButton" Content="Update selection" Click="updateBookingButton_Click" Margin="200,0" TabIndex="5"></Button>
+                    <Button x:Name="deleteBookingButton" Content="Delete selection" Click="deleteBookingButton_Click" TabIndex="6"></Button>
+                </StackPanel>
+                <DataGrid Name="bookingsDataGrid" SelectionChanged="SelectionChanged" ColumnWidth="Auto" ItemsSource="{Binding}" Margin="10,0" AutoGenerateColumns="False" SelectionMode="Single" TabIndex="0" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding date}" Header="Date" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding duration}" Header="Duration" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding Planes.plate}" Header="Plane" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding User.name}" Header="Pilot" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+        <TabItem x:Name="tabPlanes" Header="Planes" TabIndex="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Filter by model:" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Name="modelTextBoxPlanes" TabIndex="1" IsTabStop="True" Margin="10,0" Width="200" TextChanged="modelTextBoxPlanes_TextChanged"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="addPlaneButton" Content="Add plane" Click="addPlaneButton_Click" TabIndex="2" IsEnabled="False"></Button>
+                    <Button x:Name="updatePlaneButton" Content="Update selection" Click="updatePlaneButton_Click" Margin="200,0" TabIndex="3" IsEnabled="False"></Button>
+                    <Button x:Name="deletePlaneButton" Content="Delete selection" Click="deletePlaneButton_Click" TabIndex="4" IsEnabled="False"></Button>
+                </StackPanel>
+                <DataGrid Name="planesDataGrid" SelectionChanged="SelectionChanged" ColumnWidth="Auto" ItemsSource="{Binding}" Margin="10,0,10,10" AutoGenerateColumns="False" SelectionMode="Single" TabIndex="0" IsReadOnly="True" IsEnabled="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding plate}" Header="Plate" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding model}" Header="Model" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding User.name}" Header="Owner" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding LandingFields.name}" Header="Landing Fields" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+        <TabItem x:Name="tabLandingFields" Header="Landing Fields" TabIndex="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Filter by name:" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Name="nameTextBoxLandingFields" TabIndex="1" Margin="10,0" IsTabStop="True" Width="200" TextChanged="nameTextBoxLandingFields_TextChanged"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="addLandingFieldButton" Content="Add landing field" Click="addLandingFieldButton_Click" TabIndex="2" IsEnabled="False"></Button>
+                    <Button x:Name="updateLandingFieldButton" Content="Update selection" Click="updateLandingFieldButton_Click" Margin="200,0" TabIndex="3" IsEnabled="False"></Button>
+                    <Button x:Name="deleteLandingFieldButton" Content="Delete selection" Click="deleteLandingFieldButton_Click" TabIndex="4" IsEnabled="False"></Button>
+                </StackPanel>
+                <DataGrid Name="landingFieldsDataGrid" SelectionChanged="SelectionChanged" ColumnWidth="Auto" ItemsSource="{Binding}" Margin="10,0,10,10" AutoGenerateColumns="False" SelectionMode="Single" TabIndex="0" IsReadOnly="True" IsEnabled="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding name}" Header="Name" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding acronym}" Header="Acronym" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+        <TabItem x:Name="usersTabItem" Header="Users" IsEnabled="False" TabIndex="0">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,10" HorizontalAlignment="Center">
+                    <TextBlock Text="Filter by name:" VerticalAlignment="Center"></TextBlock>
+                    <TextBox Name="nameTextBoxUsers" TabIndex="1" Margin="10,0" IsTabStop="True" Width="200" TextChanged="nameTextBoxUsers_TextChanged"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="addUserButton" Content="Add user" Click="addUserButton_Click" TabIndex="2"></Button>
+                    <Button x:Name="updateUserButton" Content="Update selection" Click="updateUserButton_Click" Margin="200,0" TabIndex="3"></Button>
+                    <Button x:Name="deleteUserButton" Content="Delete selection" Click="deleteUserButton_Click" TabIndex="4"></Button>
+                </StackPanel>
+                <DataGrid Name="usersDataGrid" SelectionChanged="SelectionChanged" ColumnWidth="Auto" ItemsSource="{Binding}" Margin="10,0,10,10" AutoGenerateColumns="False" SelectionMode="Single" TabIndex="0" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding name}" Header="Name" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding lastname}" Header="Lastname" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding UserTypes.type}" Header="User type" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding LandingFields.name}" Header="Landing field" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </TabItem>
+        <TabItem x:Name="tabProfile" Header="Profile" TabIndex="0">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Image x:Name="profileImage" Grid.RowSpan="3" Source="images/contact_image.png" VerticalAlignment="Center" Width="200" Height="200" Margin="50, 0" />
+                <TextBlock Grid.Column="1" Text="Name: " VerticalAlignment="Center" />
+                <TextBox x:Name="nameTextBox" Grid.Column="2" Margin="20" TabIndex="1" />
+                <TextBlock Grid.Column="3" Text="Lastname: " VerticalAlignment="Center" />
+                <TextBox x:Name="lastnameTextBox" Grid.Column="4" Margin="20" TabIndex="2" />
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="UserType: " VerticalAlignment="Center" />
+                <TextBox x:Name="userTypeTextBox" Grid.Row="1" Grid.Column="2" Margin="20" TabIndex="3" IsEnabled="False" />
+                <TextBlock Grid.Row="1" Grid.Column="3" Text="LandingField: " VerticalAlignment="Center"  />
+                <ComboBox x:Name="landingFieldComboBox" DisplayMemberPath="name" SelectionChanged="SelectionChanged" Grid.Row="1" Grid.Column="4" Margin="20" TabIndex="4" />
+                <TextBlock Grid.Row="2" Grid.Column="1" Text="Username: " VerticalAlignment="Center"  />
+                <TextBox x:Name="usernameTextBox" Grid.Row="2" Grid.Column="2" Margin="20" TabIndex="5" />
+                <TextBlock Grid.Row="2" Grid.Column="3" Text="Password: " VerticalAlignment="Center"  />
+                <PasswordBox x:Name="passwordPasswordBox" Grid.Row="2" Grid.Column="4" Margin="20" TabIndex="6" />
+                <TextBlock Text="Owned Planes: " Grid.Row="3" VerticalAlignment="Bottom" Margin="20,0,0,0"/>
+                <Button x:Name="saveProfileButton" Grid.Row="3" Grid.Column="4" TabIndex="7" Content="Save" Width="75" HorizontalAlignment="Right" Margin="20,-10,20,15" Click="saveProfileButton_Click" />
+                <DataGrid Name="userPlanesDataGrid" SelectionChanged="SelectionChanged" ColumnWidth="Auto" ItemsSource="{Binding}" Margin="10,5,10,0" AutoGenerateColumns="False" SelectionMode="Single" TabIndex="0" Grid.Row="4" Grid.ColumnSpan="5" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Binding="{Binding plate}" Header="Plate" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding model}" Header="Model" Width="*"/>
+                        <DataGridTextColumn Binding="{Binding User.name}" Header="Owner" Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Grid.Row="5" Grid.ColumnSpan="5" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="addUserPlaneButton" Content="Add plane" Click="addUserPlaneButton_Click" TabIndex="8"></Button>
+                    <Button x:Name="updateUserPlaneButton" Content="Update selection" Click="updateUserPlaneButton_Click" Margin="200,0" TabIndex="9"></Button>
+                    <Button x:Name="deleteUserPlaneButton" Content="Delete selection" Click="deleteUserPlaneButton_Click" TabIndex="10"></Button>
+                </StackPanel>
+            </Grid>
+        </TabItem>
+    </TabControl>
+</Window>
